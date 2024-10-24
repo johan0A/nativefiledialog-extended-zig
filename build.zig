@@ -47,14 +47,24 @@ pub fn build(b: *std.Build) void {
             nfd.root_module.addCMacro("NFD_PORTAL", "1");
         } else {
             nfd.addCSourceFile(.{ .file = upstream.path("src/nfd_gtk.cpp") });
-            // nfd.linkSystemLibrary("gtk+-3.0");
+
+            const gtk = b.addStaticLibrary(.{
+                .name = "gtk",
+                .root_source_file = b.path("src/gtk.zig"),
+                .target = target,
+                .optimize = optimize,
+                .link_libc = true,
+            });
+
             if (b.lazyDependency("gtk_3_headers", .{
                 .target = target,
                 .optimize = optimize,
             })) |dep| {
-                nfd.linkLibrary(dep.artifact("gtk_3_headers"));
-                nfd.installLibraryHeaders(dep.artifact("gtk_3_headers"));
+                gtk.linkLibrary(dep.artifact("gtk_3_headers"));
+                gtk.installLibraryHeaders(dep.artifact("gtk_3_headers"));
             }
+
+            nfd.linkLibrary(gtk);
         }
     }
 

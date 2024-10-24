@@ -1,3 +1,5 @@
+# this project is WIP
+
 [![CI](https://github.com/allyourcodebase/nativefiledialog-extended/actions/workflows/ci.yaml/badge.svg)](https://github.com/allyourcodebase/nativefiledialog-extended/actions)
 
 # nativefiledialog-extended
@@ -23,7 +25,3 @@ const nfd_dependency = b.dependency("nativefiledialog-extended", .{
 });
 your_exe.linkLibrary(nfd_dependency.artifact("nfd"));
 ```
-
-## Dependencies
-
-See https://github.com/btzy/nativefiledialog-extended/tree/v1.2.1#dependencies

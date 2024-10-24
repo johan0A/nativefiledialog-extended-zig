@@ -1,11 +1,7 @@
 .{
     .name = "gtk_3_headers",
     .version = "0.0.0",
-    .dependencies = .{
-        .x11_headers = .{
-            .path = "./vendor/x11-headers",
-        },
-    },
+    .dependencies = .{},
     .paths = .{
         "headers",
         "X11",

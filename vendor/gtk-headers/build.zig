@@ -12,7 +12,5 @@ pub fn build(b: *std.Build) void {
     });
 
     lib.installHeadersDirectory(b.path("./headers/"), ".", .{});
-    lib.installHeadersDirectory(b.path("./X11/"), "X11", .{});
-    lib.linkLibC();
     b.installArtifact(lib);
 }

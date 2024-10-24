@@ -11,7 +11,7 @@
             .path = "./vendor/xcode-frameworks",
         },
         .gtk_3_headers = .{
-            .path = "./vendor/gtk",
+            .path = "./vendor/gtk-headers",
         },
     },
     .paths = .{
