@@ -25,24 +25,49 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      
       - name: Setup Zig
         uses: mlugg/setup-zig@v1
         with:
           version: ${{ matrix.zig-version }}
-
+      
       - name: Install Dependencies
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
           sudo apt-get install libdbus-1-dev
-
+      
       - name: Check Formatting
         run: zig fmt --ast-check --check .
-
-      - name: Build
+      
+      - name: Build Native
         run: zig build install install-tests --summary all
-
+      
       - name: Build with -Dportal
         if: matrix.os == 'ubuntu-latest'
         run: zig build install install-tests -Dportal --summary all
+
+  cross-compile:
+    strategy:
+      fail-fast: false
+      matrix:
+        zig-version: ["0.13.0"]
+        include:
+          - target: aarch64-macos
+            os: ubuntu-latest
+          - target: x86_64-linux
+            os: windows-latest
+          - target: x86_64-windows
+            os: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Zig
+        uses: mlugg/setup-zig@v1
+        with:
+          version: ${{ matrix.zig-version }}
+      
+      - name: Cross Compile
+        run: zig build install install-tests -Dtarget=${{ matrix.target }} --summary all
