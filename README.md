@@ -6,7 +6,7 @@
 
 This is [nativefiledialog-extended](https://github.com/btzy/nativefiledialog-extended), packaged for [Zig](https://ziglang.org/).
 
-## Installation
+<!-- ## Installation
 
 First, update your `build.zig.zon`:
 
@@ -24,4 +24,4 @@ const nfd_dependency = b.dependency("nativefiledialog-extended", .{
     .optimize = optimize,
 });
 your_exe.linkLibrary(nfd_dependency.artifact("nfd"));
-```
+``` -->
