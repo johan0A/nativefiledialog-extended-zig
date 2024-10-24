@@ -15,6 +15,8 @@
         },
     },
     .paths = .{
+        "src",
+        "vendor",
         "build.zig",
         "build.zig.zon",
         "LICENSE",
